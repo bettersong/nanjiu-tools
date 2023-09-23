@@ -27,6 +27,6 @@ jobs:
       - name: Deploy 🚀 # 部署
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
-          repo-token: ${{ secrets.NANJIU_TOOLS_DEPLOY }} # 这里填写你的 token
+          ACCESS_TOKEN: ${{ secrets.NANJIU_TOOLS_DEPLOY }} # 这里填写你的 token
           branch: static-pages # 部署后提交到的分支
           folder: dist # 这里填打包好的目录名称
