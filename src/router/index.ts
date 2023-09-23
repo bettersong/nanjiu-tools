@@ -15,11 +15,6 @@ const router = createRouter({
       component: () => import("../views/AboutView.vue"),
     },
     {
-      path: "/file",
-      name: "file",
-      component: () => import("../views/FileDemo.vue"),
-    },
-    {
       path: "/sharp",
       name: "sharp",
       // route level code-splitting
