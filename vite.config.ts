@@ -25,6 +25,7 @@ export default defineConfig({
     },
   },
   server: {
+    base: "/nanjiu-tools/",
     cors: true, // 默认启用并允许任何源
     proxy: {
       "/jjapi": {
