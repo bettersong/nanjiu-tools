@@ -12,6 +12,10 @@ jobs:
         with:
           persist-credentials: false
 
+      - uses: actions/setup-node@v3  # 指定node版本
+        with:
+          node-version: '14'
+          
       - name: Install and Build # 下载依赖 打包项目
         run: |
           npm cache clean --force
