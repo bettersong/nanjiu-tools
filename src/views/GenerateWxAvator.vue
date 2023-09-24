@@ -157,7 +157,7 @@ body {
   flex-direction: column;
   justify-content: center;
   box-sizing: border-box;
-  width: 100vw;
+  // width: 100vw;
 }
 .generate_title {
   width: 100%;
@@ -184,7 +184,6 @@ body {
   width: 320px;
   height: 80vh;
   padding: 12px;
-  margin-bottom: 12px;
   background-color: #fff;
   border-radius: 10px;
   border: 1px solid #ccc;
@@ -204,7 +203,6 @@ body {
   flex: 1;
   height: 80vh;
   padding: 12px;
-  margin-bottom: 12px;
   background-color: #fff;
   border-radius: 10px;
   border: 1px solid #ccc;
