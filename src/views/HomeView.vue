@@ -19,7 +19,8 @@ const change = async (e: any) => {
 
 <template>
   <main>
-    <input type="file" @change="change" />
+    <!-- <input type="file" @change="change" /> -->
+    前端南玖
   </main>
 </template>
 
