@@ -22,7 +22,7 @@
     </el-form>
 
     <div ref="mergeImg" class="generate_img">
-      <el-empty v-if="!canDownload" description="合成区" />
+      <el-empty class="empty_box" v-if="!canDownload" description="合成区" />
       <canvas id="my_canvas" width="300" height="300"></canvas>
     </div>
   </div>
@@ -61,12 +61,12 @@ const ua = window.navigator.userAgent;
 onMounted(() => {
   canvas.value = document.getElementById("my_canvas");
   ctx.value = canvas.value.getContext("2d");
-  const dpr = window.devicePixelRatio || 1;
-  canvas.value.width = 300 * dpr;
-  canvas.value.height = 300 * dpr;
-  canvas.value.style.width = "300px";
-  canvas.value.style.height = "300px";
-  ctx.value.scale(dpr, dpr);
+  const dpr = window.devicePixelRatio || 1; // 获取设备的devicePixelRatio
+  canvas.value.width = 300 * dpr; // 画布宽高放大dpr倍，绘制后再缩小dpr倍，解决模糊问题
+  canvas.value.height = 300 * dpr; // 画布宽高放大dpr倍，绘制后再缩小dpr倍，解决模糊问题
+  canvas.value.style.width = "300px"; // 显示高
+  canvas.value.style.height = "300px"; // 显示高
+  ctx.value.scale(dpr, dpr); // 按比例缩放画布，解决模糊问题
   init();
 });
 
@@ -169,19 +169,19 @@ const drawImg4 = (ctx: any) => {
   const gqImg = new Image();
   gqImg.src = gqList.value[template_id.value - 1].img;
   img.onload = () => {
-    ctx.drawImage(img, 0, 0, 300, 300);
+    ctx.drawImage(img, 0, 0, 300, 300); // 绘制头像
     gqImg.onload = () => {
-      ctx.drawImage(gqImg, 0, 0, 300, 300);
-      ctx.fillStyle = textColor.value;
-      ctx.font = "20px kaiti";
-      const textList = text.value?.split("，") ?? [];
+      ctx.drawImage(gqImg, 0, 0, 300, 300); // 绘制国庆图
+      ctx.fillStyle = textColor.value; // 设置文字颜色
+      ctx.font = "20px kaiti"; // 设置文字大小及字体
+      const textList = text.value?.split("，") ?? []; // 以中文逗号分割文字
       textList.forEach((item: string, i: number) => {
         drawVerticalText(ctx, item ?? "", 20 + i * 20, 186 + i * 20, {
           size: 20,
-        });
+        }); // 绘制文字
       });
     };
-    canDownload.value = true;
+    canDownload.value = true; // 合成完成
   };
 };
 
@@ -227,9 +227,15 @@ defineExpose({ clearCanvas, clear, init });
 .el-form-item {
   margin-bottom: 0 !important;
 }
+.empty_box {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
 </style>
 <style lang="scss" scoped>
 .generate_img {
+  position: relative;
   width: 300px;
   height: 300px;
   border-radius: 4px;

@@ -184,6 +184,7 @@ body {
   width: 320px;
   height: 80vh;
   padding: 12px;
+  margin-bottom: 10px;
   background-color: #fff;
   border-radius: 10px;
   border: 1px solid #ccc;
@@ -203,6 +204,7 @@ body {
   flex: 1;
   height: 80vh;
   padding: 12px;
+  margin-bottom: 10px;
   background-color: #fff;
   border-radius: 10px;
   border: 1px solid #ccc;
@@ -244,7 +246,7 @@ body {
 }
 .footer {
   width: 100%;
-  margin-top: 30px;
+  padding: 20px 0;
   font-size: 20px;
   font-weight: bold;
   text-align: center;
