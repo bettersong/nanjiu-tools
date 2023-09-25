@@ -100,8 +100,7 @@ const generateImg = () => {
   if (devices.some((item) => ua.includes(item))) {
     mergeImg.value?.scrollIntoView();
   }
-  mergeFlag.value = true;
-  mergeing.value = true;
+
   if (!user_img.value) {
     console.log("生成图片", user_img.value);
     ElMessage({
@@ -109,6 +108,8 @@ const generateImg = () => {
       type: "warning",
     });
   } else {
+    mergeFlag.value = true;
+    mergeing.value = true;
     if (template_id.value === 1) {
       drawImg1(ctx.value);
     } else if (template_id.value === 2) {
