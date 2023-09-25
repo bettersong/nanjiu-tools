@@ -19,6 +19,14 @@
       <div class="desc" v-if="gqList[template_id - 1].desc">
         说明：{{ gqList[template_id - 1].desc }}
       </div>
+      <div v-if="mergeFlag">
+        <el-progress
+          :percentage="progress"
+          status="success"
+          :indeterminate="true"
+          :duration="duration"
+        />
+      </div>
     </el-form>
 
     <div ref="mergeImg" class="generate_img">
@@ -44,6 +52,9 @@ const ctx = ref(null) as any;
 const canDownload = ref(false);
 const text = ref("");
 const textColor = ref("#FED800");
+const mergeFlag = ref(false);
+const progress = ref(0);
+const duration = ref(3);
 
 const hasText = computed(() => {
   return gqList.value[template_id.value - 1].has?.includes("text");
@@ -71,8 +82,15 @@ onMounted(() => {
 });
 
 const clearCanvas = () => {
+  progress.value = 0;
+  duration.value = 3;
   ctx.value?.clearRect(0, 0, 300, 300);
   canDownload.value = false;
+};
+const mergeDone = () => {
+  progress.value = 100;
+  canDownload.value = true;
+  duration.value = 0;
 };
 const mergeImg = ref(null) as any;
 const generateImg = () => {
@@ -80,7 +98,7 @@ const generateImg = () => {
   if (devices.some((item) => ua.includes(item))) {
     mergeImg.value?.scrollIntoView();
   }
-
+  mergeFlag.value = true;
   if (!user_img.value) {
     console.log("生成图片", user_img.value);
     ElMessage({
@@ -114,8 +132,8 @@ const drawImg1 = (ctx: any) => {
       ctx.fillStyle = textColor.value;
       ctx.font = "26px kaiti";
       ctx.fillText(text.value ?? "", 52, 245);
+      mergeDone();
     };
-    canDownload.value = true;
   };
 };
 
@@ -129,8 +147,8 @@ const drawImg2 = (ctx: any) => {
     ctx.drawImage(img, 0, 0, 300, 300);
     gqImg.onload = () => {
       ctx.drawImage(gqImg, 0, 0, 300, 300);
+      mergeDone();
     };
-    canDownload.value = true;
   };
 };
 // 文字竖排
@@ -158,8 +176,8 @@ const drawImg3 = (ctx: any) => {
     ctx.drawImage(img, 0, 0, 300, 300);
     gqImg.onload = () => {
       ctx.drawImage(gqImg, 0, 0, 300, 300);
+      mergeDone();
     };
-    canDownload.value = true;
   };
 };
 // 模版4
@@ -180,8 +198,8 @@ const drawImg4 = (ctx: any) => {
           size: 20,
         }); // 绘制文字
       });
+      mergeDone();
     };
-    canDownload.value = true; // 合成完成
   };
 };
 
@@ -219,6 +237,7 @@ const clear = () => {
 const init = () => {
   text.value = gqList.value[template_id.value - 1].text ?? "";
   textColor.value = gqList.value[template_id.value - 1].textColor ?? "#FED800";
+  mergeFlag.value = false;
 };
 defineExpose({ clearCanvas, clear, init });
 </script>

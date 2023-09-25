@@ -246,7 +246,7 @@ body {
 }
 .footer {
   width: 100%;
-  padding: 20px 0;
+  padding: 20px 0 40px;
   font-size: 20px;
   font-weight: bold;
   text-align: center;
