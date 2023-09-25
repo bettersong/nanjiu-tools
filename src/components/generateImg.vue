@@ -30,7 +30,7 @@
     </el-form>
 
     <div ref="mergeImg" class="generate_img">
-      <el-empty class="empty_box" v-if="!canDownload" description="合成区" />
+      <el-empty class="empty_box" v-if="!mergeing" description="合成区" />
       <canvas id="my_canvas" width="300" height="300"></canvas>
     </div>
   </div>
@@ -55,6 +55,7 @@ const textColor = ref("#FED800");
 const mergeFlag = ref(false);
 const progress = ref(0);
 const duration = ref(3);
+const mergeing = ref(false);
 
 const hasText = computed(() => {
   return gqList.value[template_id.value - 1].has?.includes("text");
@@ -86,6 +87,7 @@ const clearCanvas = () => {
   duration.value = 3;
   ctx.value?.clearRect(0, 0, 300, 300);
   canDownload.value = false;
+  mergeing.value = false;
 };
 const mergeDone = () => {
   progress.value = 100;
@@ -99,6 +101,7 @@ const generateImg = () => {
     mergeImg.value?.scrollIntoView();
   }
   mergeFlag.value = true;
+  mergeing.value = true;
   if (!user_img.value) {
     console.log("生成图片", user_img.value);
     ElMessage({
