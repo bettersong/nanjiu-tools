@@ -112,7 +112,7 @@ const generateImg = () => {
   } else {
     mergeFlag.value = true;
     mergeing.value = true;
-    progress.value = Math.random() * 30;
+    progress.value = Number((Math.random() * 50).toFixed(0));
     if (template_id.value === 1) {
       drawImg1(ctx.value);
     } else if (template_id.value === 2) {
