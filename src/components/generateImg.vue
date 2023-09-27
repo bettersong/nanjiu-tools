@@ -19,11 +19,10 @@
       <div class="desc" v-if="gqList[template_id - 1].desc">
         说明：{{ gqList[template_id - 1].desc }}
       </div>
-      <div v-if="mergeFlag">
+      <div>
         <el-progress
           :percentage="progress"
-          :indeterminate="true"
-          :duration="duration"
+          :indeterminate="false"
           :format="format"
         />
       </div>
@@ -54,7 +53,6 @@ const text = ref("");
 const textColor = ref("#FED800");
 const mergeFlag = ref(false);
 const progress = ref(0);
-const duration = ref(3);
 const mergeing = ref(false);
 const format = (percentage: number) =>
   percentage === 100 ? "合成成功" : `${percentage}%`;
@@ -86,7 +84,6 @@ onMounted(() => {
 
 const clearCanvas = () => {
   progress.value = 0;
-  duration.value = 3;
   ctx.value?.clearRect(0, 0, 300, 300);
   canDownload.value = false;
   mergeing.value = false;
@@ -94,7 +91,6 @@ const clearCanvas = () => {
 const mergeDone = () => {
   progress.value = 100;
   canDownload.value = true;
-  duration.value = 0;
 };
 const mergeImg = ref(null) as any;
 const generateImg = () => {
@@ -240,6 +236,7 @@ const downloadImg = () => {
 };
 const clear = () => {
   text.value = "";
+  progress.value = 0;
 };
 const init = () => {
   text.value = gqList.value[template_id.value - 1].text ?? "";
