@@ -22,9 +22,9 @@
       <div v-if="mergeFlag">
         <el-progress
           :percentage="progress"
-          status="success"
           :indeterminate="true"
           :duration="duration"
+          :format="format"
         />
       </div>
     </el-form>
@@ -56,6 +56,8 @@ const mergeFlag = ref(false);
 const progress = ref(0);
 const duration = ref(3);
 const mergeing = ref(false);
+const format = (percentage: number) =>
+  percentage === 100 ? "合成成功" : `${percentage}%`;
 
 const hasText = computed(() => {
   return gqList.value[template_id.value - 1].has?.includes("text");
@@ -110,6 +112,7 @@ const generateImg = () => {
   } else {
     mergeFlag.value = true;
     mergeing.value = true;
+    progress.value = Math.random() * 30;
     if (template_id.value === 1) {
       drawImg1(ctx.value);
     } else if (template_id.value === 2) {
