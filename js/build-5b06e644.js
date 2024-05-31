@@ -1,0 +1,1 @@
+import{d as s,r as l,g as r,a as o,i as e,t as a,u,o as i}from"./vendor-92f39675.js";const _=s({__name:"build",setup(c){const n=l("nanjiu");let t=r({value:18});return(d,m)=>(i(),o("div",null,[e("div",null,"name: "+a(n.value),1),e("div",null,"age: "+a(u(t)),1)]))}});export{_ as default};
