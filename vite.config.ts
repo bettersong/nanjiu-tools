@@ -33,9 +33,6 @@ export default defineConfig({
           if (assetInfo?.name?.endsWith(".css")) {
             return `css/[name]-[hash][extname]`;
           }
-          if (assetInfo?.name?.endsWith(".js")) {
-            return `js/[name]-[hash][extname]`;
-          }
           return `assets/[name]-[hash][extname]`;
         },
         sanitizeFileName: (name) => {

@@ -28,9 +28,14 @@ const router = createRouter({
       component: () => import("../views/SharpView.vue"),
     },
     {
-      path: "/generate_image",
+      path: "/avator",
       name: "generate_image",
       component: () => import("../views/GenerateWxAvator.vue"),
+    },
+    {
+      path: "/build",
+      name: "build",
+      component: () => import("../views/build.vue"),
     },
   ],
 });
