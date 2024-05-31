@@ -19,13 +19,25 @@ export default defineConfig({
     chunkSizeWarningLimit: 2000, // 解决包大小超过500kb的警告
     rollupOptions: {
       output: {
-        manualChunks: {
-          // elementPlus: ["element-plus"],
-          // highlightjs: ["highlight.js"],
+        manualChunks(id) {
+          if (id.includes("axios")) {
+            return "axios";
+          }
+          if (id.includes("node_modules")) {
+            return "vendor";
+          }
         },
-        chunkFileNames: "assets/[name]-[hash].js",
-        entryFileNames: "assets/[name]-[hash].js",
-        assetFileNames: "assets/[name]-[hash].[ext]",
+        chunkFileNames: "js/[name]-[hash].js",
+        entryFileNames: "js/[name]-[hash].js",
+        assetFileNames: (assetInfo) => {
+          if (assetInfo?.name?.endsWith(".css")) {
+            return `css/[name]-[hash][extname]`;
+          }
+          if (assetInfo?.name?.endsWith(".js")) {
+            return `js/[name]-[hash][extname]`;
+          }
+          return `assets/[name]-[hash][extname]`;
+        },
         sanitizeFileName: (name) => {
           const match = DRIVE_LETTER_REGEX.exec(name);
           const driveLetter = match ? match[0] : "";
